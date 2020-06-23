@@ -136,50 +136,35 @@ final class TimelineDatasource: NSObject {
         registerForDragAndDrop()
     }
 
+    private func timelineData(from cmd: TimelineDisplayCommand, zoomLevel: TimelineDatasource.ZoomLevel? = nil) -> TimelineData {
+        return TimelineData(cmd: cmd,
+                                zoomLevel: zoomLevel ?? self.zoomLevel,
+                                runningTimeEntry: getRunningTimeEntryForRendering(start: cmd.start, end: cmd.end),
+                                draggingCreatedTimeEntry: draggCreatedTimeEntry)
+    }
+
     func render(cmd: TimelineDisplayCommand, zoomLevel: TimelineDatasource.ZoomLevel) {
         self.cmd = cmd
-        let data = TimelineData(cmd: cmd,
-                                zoomLevel: zoomLevel,
-                                runningTimeEntry: getRunningTimeEntryForRendering(start: cmd.start, end: cmd.end))
+        let data = timelineData(from: cmd, zoomLevel: zoomLevel)
         render(data)
         delegate?.shouldHandleEmptyState(data)
     }
 
     func renderNewDraggingTimeEntry(_ entry: TimelineTimeEntryPlaceholder) {
         guard let cmd = cmd else { return }
-
         delegate?.shouldHideAllPopover()
-
-        let data = TimelineData(cmd: cmd,
-                                zoomLevel: zoomLevel,
-                                runningTimeEntry: getRunningTimeEntryForRendering(start: cmd.start, end: cmd.end),
-                                draggingCreatedTimeEntry: draggCreatedTimeEntry)
-        render(data)
-//        delegate?.shouldHandleEmptyState(data)
-
+        render(timelineData(from: cmd))
         draggCreatedTimeEntry = entry
     }
 
     func updateDraggingTimeEntry(withStartTime startTime: TimeInterval, endTime: TimeInterval) {
         draggCreatedTimeEntry?.start = startTime
         draggCreatedTimeEntry?.end = endTime
-
         flow.invalidateLayout()
-//        delegate?.shouldPresentResizePopover(at: timeEntryCell, onTopCorner: false)
     }
 
     func createdDraggingTimeEntry(withStartTime startTime: TimeInterval, endTime: TimeInterval) {
         draggCreatedTimeEntry = nil
-    }
-
-    func renderDraggingTimeEntry(_ entry: TimelineTimeEntryPlaceholder) {
-        guard let cmd = cmd else { return }
-        let data = TimelineData(cmd: cmd,
-                                zoomLevel: zoomLevel,
-                                runningTimeEntry: getRunningTimeEntryForRendering(start: cmd.start, end: cmd.end),
-                                draggingCreatedTimeEntry: entry)
-        render(data)
-        delegate?.shouldHandleEmptyState(data)
     }
 
     private func render(_ timeline: TimelineData) {
@@ -205,9 +190,7 @@ final class TimelineDatasource: NSObject {
             // It's essential since it's a straighforward approach to update the running TE
             // If the data is changes (desc, project, color, time, ...)
             runningTimeEntry = TimelineTimeEntry(timeEntry)
-            let data = TimelineData(cmd: cmd,
-                                    zoomLevel: zoomLevel,
-                                    runningTimeEntry: getRunningTimeEntryForRendering(start: cmd.start, end: cmd.end))
+            let data = timelineData(from: cmd)
 
             // Render and start the timer
             render(data)
@@ -306,7 +289,7 @@ extension TimelineDatasource: NSCollectionViewDataSource, NSCollectionViewDelega
                 cell.delegate = self
                 cell.config(for: timeEntry)
                 return cell
-            case let _ as TimelineTimeEntryPlaceholder:
+            case is TimelineTimeEntryPlaceholder:
                 let cell = collectionView.makeItem(withIdentifier: Constants.TimeEntryPlaceholderCellID, for: indexPath) as! TimelineTimeEntryPlaceholderCell
                 return cell
             case let emptyTimeEntry as TimelineBaseTimeEntry:

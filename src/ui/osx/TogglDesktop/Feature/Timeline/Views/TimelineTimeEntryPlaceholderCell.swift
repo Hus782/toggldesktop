@@ -8,11 +8,19 @@
 
 import Cocoa
 
-class TimelineTimeEntryPlaceholderCell: NSCollectionViewItem {
+class TimelineTimeEntryPlaceholderCell: TimelineBaseCell {
+    @IBOutlet weak var placeholderLabel: NSTextField!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do view setup here.
+
+        placeholderLabel.stringValue = NSLocalizedString("New entry",
+                                                         comment: "Placeholder text to show when dragg-creating new Time Entry")
     }
-    
+
+    override func viewWillAppear() {
+        super.viewDidAppear()
+        renderColor(with: TimeEntryViewItem.defaultProjectColor())
+    }
+
 }

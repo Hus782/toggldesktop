@@ -128,5 +128,7 @@ final class TimelineTimeEntry: TimelineBaseTimeEntry {
     }
 }
 
+/// Simple item to represent simple placeholder view in place where the time entry will be placed later.
+/// For example, used to show a view when user is creating entry with dragging action.
 final class TimelineTimeEntryPlaceholder: TimelineBaseTimeEntry {
 }
