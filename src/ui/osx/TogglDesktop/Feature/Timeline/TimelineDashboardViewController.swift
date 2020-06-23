@@ -587,10 +587,31 @@ extension TimelineDashboardViewController: TimelineCollectionViewDelegate {
         }
 
         // Create
-        startNewTimeEntry(at: startTime, ended: startTime + 1)
+        let defaultDuration: TimeInterval = 1 //15 * 60
+        startNewTimeEntry(at: startTime, ended: startTime + defaultDuration)
 
         // Onboarding
         DesktopLibraryBridge.shared().userDidEditOrAddTimeEntryDirectlyOnTimelineView()
+    }
+
+    func timelineDidStartDragging(withStartTime startTime: TimeInterval, endTime: TimeInterval) {
+//        let draggTimeEntry = TimelineTimeEntry(startTime: startTime, endTime: endTime, description: "New entry")
+//        datasource.renderDraggingTimeEntry(draggTimeEntry)
+        let draggTimeEntry = TimelineTimeEntryPlaceholder(start: startTime, end: endTime)
+        datasource.renderNewDraggingTimeEntry(draggTimeEntry)
+    }
+
+    func timelineDidUpdateDragging(withStartTime startTime: TimeInterval, endTime: TimeInterval) {
+//        let draggTimeEntry = TimelineTimeEntry(startTime: startTime, endTime: endTime, description: "New entry")
+//        datasource.renderDraggingTimeEntry(draggTimeEntry)
+        datasource.updateDraggingTimeEntry(withStartTime: startTime, endTime: endTime)
+    }
+
+    func timelineDidEndDragging(withStartTime startTime: TimeInterval, endTime: TimeInterval) {
+//        let draggTimeEntry = TimelineTimeEntry(startTime: startTime, endTime: endTime, description: "New entry")
+//        datasource.renderDraggingTimeEntry(draggTimeEntry)
+        datasource.createdDraggingTimeEntry(withStartTime: startTime, endTime: endTime)
+        startNewTimeEntry(at: startTime, ended: endTime)
     }
 }
 

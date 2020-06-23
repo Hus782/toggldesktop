@@ -31,6 +31,10 @@
 		49418B3A249CE70F00265665 /* TimelineInitialDateProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492F5F01248550F800FFEC70 /* TimelineInitialDateProvider.swift */; };
 		49418B3B249CE71800265665 /* Color+Adaptive.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2A116A247BB72A00B97FAE /* Color+Adaptive.swift */; };
 		49418B4B249CEBA300265665 /* TogglDesktopTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D3603A24878FA000527DE8 /* TogglDesktopTests.swift */; };
+		49C2FAC724A20DAC001C4EBD /* TimelineTimeEntryPlaceholderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C2FAC524A20DAC001C4EBD /* TimelineTimeEntryPlaceholderCell.swift */; };
+		49C2FAC824A20DAC001C4EBD /* TimelineTimeEntryPlaceholderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C2FAC524A20DAC001C4EBD /* TimelineTimeEntryPlaceholderCell.swift */; };
+		49C2FAC924A20DAC001C4EBD /* TimelineTimeEntryPlaceholderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49C2FAC624A20DAC001C4EBD /* TimelineTimeEntryPlaceholderCell.xib */; };
+		49C2FACA24A20DAC001C4EBD /* TimelineTimeEntryPlaceholderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49C2FAC624A20DAC001C4EBD /* TimelineTimeEntryPlaceholderCell.xib */; };
 		49D3603B24878FA000527DE8 /* TogglDesktopTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D3603A24878FA000527DE8 /* TogglDesktopTests.swift */; };
 		622BBF654A6A958692A4633B /* Pods_TogglDesktop.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 776525112125F6AD81DF4DEF /* Pods_TogglDesktop.framework */; };
 		69FC17F517E6534400B96425 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69FC17F417E6534400B96425 /* Cocoa.framework */; };
@@ -745,6 +749,8 @@
 		492F5F01248550F800FFEC70 /* TimelineInitialDateProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineInitialDateProvider.swift; sourceTree = "<group>"; };
 		49418B40249CE77D00265665 /* TogglDesktopTests-AppStore.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "TogglDesktopTests-AppStore.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		49418B44249CE77D00265665 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		49C2FAC524A20DAC001C4EBD /* TimelineTimeEntryPlaceholderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineTimeEntryPlaceholderCell.swift; sourceTree = "<group>"; };
+		49C2FAC624A20DAC001C4EBD /* TimelineTimeEntryPlaceholderCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TimelineTimeEntryPlaceholderCell.xib; sourceTree = "<group>"; };
 		49D3603824878FA000527DE8 /* TogglDesktopTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TogglDesktopTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		49D3603A24878FA000527DE8 /* TogglDesktopTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TogglDesktopTests.swift; sourceTree = "<group>"; };
 		49D3603C24878FA000527DE8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -1828,6 +1834,8 @@
 				BA75FF2222BCC1EA00D3F08C /* TimelineTimeLabelCell.xib */,
 				BA75FF2522BCC1FC00D3F08C /* TimelineTimeEntryCell.swift */,
 				BA75FF2622BCC1FC00D3F08C /* TimelineTimeEntryCell.xib */,
+				49C2FAC524A20DAC001C4EBD /* TimelineTimeEntryPlaceholderCell.swift */,
+				49C2FAC624A20DAC001C4EBD /* TimelineTimeEntryPlaceholderCell.xib */,
 				BAA0104D22CB66D0007C1541 /* TimelineEmptyTimeEntryCell.swift */,
 				BAA0104E22CB66D0007C1541 /* TimelineEmptyTimeEntryCell.xib */,
 				BA75FF2922BCC20D00D3F08C /* TimelineActivityCell.swift */,
@@ -2246,6 +2254,7 @@
 				BAD15FFE223A530600A8CCC9 /* TimeEntryEmptyView.xib in Resources */,
 				BA19FC21226DA079006D8741 /* DateCellViewItem.xib in Resources */,
 				3CD30F441F58B02C006FAA0D /* OverlayViewController.xib in Resources */,
+				49C2FAC924A20DAC001C4EBD /* TimelineTimeEntryPlaceholderCell.xib in Resources */,
 				BA7D3355224898E400B953A8 /* ProjectContentCellView.xib in Resources */,
 				BA65A25222B7A66A00F895FD /* DatePickerView.xib in Resources */,
 				BA014054225711A3000E5B91 /* TagTokenView.xib in Resources */,
@@ -2315,6 +2324,7 @@
 				BA13E57F24347716005244AD /* OnboardingContentViewController.xib in Resources */,
 				BAE64E092368334000244D2B /* OverlayViewController.xib in Resources */,
 				BAE64E0A2368334000244D2B /* ProjectContentCellView.xib in Resources */,
+				49C2FACA24A20DAC001C4EBD /* TimelineTimeEntryPlaceholderCell.xib in Resources */,
 				BAE64E0B2368334000244D2B /* TagTokenView.xib in Resources */,
 				BA47DEB523966F9C005216AD /* InAppMessageViewController.xib in Resources */,
 				BAE64E0C2368334000244D2B /* AboutWindowController.xib in Resources */,
@@ -2737,6 +2747,7 @@
 				BA2A116B247BB72A00B97FAE /* Color+Adaptive.swift in Sources */,
 				C5DA1FBF17F1B08A001C4565 /* MainWindowController.m in Sources */,
 				BAA3107223CC476D008F2893 /* LayerBackedViewController.swift in Sources */,
+				49C2FAC724A20DAC001C4EBD /* TimelineTimeEntryPlaceholderCell.swift in Sources */,
 				BAE6379A22B225C70024DD08 /* AddTagButton.swift in Sources */,
 				BA2DA0C621A542E30027B7A5 /* NSTextField+Ext.m in Sources */,
 				BA712EC621BF913800A2D8DD /* TimeEntrySnapshot.swift in Sources */,
@@ -3069,6 +3080,7 @@
 				BAE64DAB2368334000244D2B /* HoverTableCellView.swift in Sources */,
 				BAE64DAC2368334000244D2B /* NSBoxClickable.m in Sources */,
 				BAE64DAD2368334000244D2B /* ProjectTextField.m in Sources */,
+				49C2FAC824A20DAC001C4EBD /* TimelineTimeEntryPlaceholderCell.swift in Sources */,
 				BA37ACD623D8900C0013EE26 /* TimelineEmptyTimeEntryCell.swift in Sources */,
 				BAE64DAE2368334000244D2B /* EditorPopover.swift in Sources */,
 				BAE64DAF2368334000244D2B /* ProjectHeaderCellView.swift in Sources */,
