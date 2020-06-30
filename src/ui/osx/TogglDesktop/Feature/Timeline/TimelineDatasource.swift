@@ -17,7 +17,7 @@ protocol TimelineDatasourceDelegate: class {
     func shouldUpdatePanelSize(with activityFrame: CGRect)
     func shouldUpdateEndTime(_ endtime: TimeInterval, for entry: TimelineTimeEntry)
     func shouldUpdateStartTime(_ start: TimeInterval, for entry: TimelineTimeEntry, keepEndTimeFixed: Bool)
-    func shouldPresentResizePopover(at cell: TimelineTimeEntryCell, onTopCorner: Bool)
+    func shouldPresentResizePopover(at cell: TimelineBaseCell, onTopCorner: Bool)
     func shouldHideAllPopover()
     func shouldHandleEmptyState(_ timelineData: TimelineData)
 }
@@ -113,6 +113,7 @@ final class TimelineDatasource: NSObject {
     private var isUserOnAction: Bool { return isUserResizing || draggingSession.isDragging }
     private var runningTimeEntry: TimelineTimeEntry?
     private var draggCreatedTimeEntry: TimelineTimeEntryPlaceholder?
+    private var draggCreatedCell: TimelineBaseCell?
     private var timer: Timer?
     private var cmd: TimelineDisplayCommand?
 
@@ -153,18 +154,31 @@ final class TimelineDatasource: NSObject {
     func renderNewDraggingTimeEntry(_ entry: TimelineTimeEntryPlaceholder) {
         guard let cmd = cmd else { return }
         delegate?.shouldHideAllPopover()
-        render(timelineData(from: cmd))
         draggCreatedTimeEntry = entry
+        render(timelineData(from: cmd))
+
+//        if let cell = draggCreatedCell {
+//            delegate?.shouldPresentResizePopover(at: cell, onTopCorner: false)
+//        }
     }
 
     func updateDraggingTimeEntry(withStartTime startTime: TimeInterval, endTime: TimeInterval) {
         draggCreatedTimeEntry?.start = startTime
         draggCreatedTimeEntry?.end = endTime
-        flow.invalidateLayout()
+
+//        collectionView.reloadData()
+//        flow.invalidateLayout()
+        guard let cmd = cmd else { return }
+        render(timelineData(from: cmd))
+
+        if let cell = draggCreatedCell {
+            delegate?.shouldPresentResizePopover(at: cell, onTopCorner: false)
+        }
     }
 
     func createdDraggingTimeEntry(withStartTime startTime: TimeInterval, endTime: TimeInterval) {
         draggCreatedTimeEntry = nil
+        draggCreatedCell = nil
     }
 
     private func render(_ timeline: TimelineData) {
@@ -291,6 +305,7 @@ extension TimelineDatasource: NSCollectionViewDataSource, NSCollectionViewDelega
                 return cell
             case is TimelineTimeEntryPlaceholder:
                 let cell = collectionView.makeItem(withIdentifier: Constants.TimeEntryPlaceholderCellID, for: indexPath) as! TimelineTimeEntryPlaceholderCell
+                draggCreatedCell = cell
                 return cell
             case let emptyTimeEntry as TimelineBaseTimeEntry:
                 let cell = collectionView.makeItem(withIdentifier: Constants.EmptyTimeEntryCellID, for: indexPath) as! TimelineEmptyTimeEntryCell

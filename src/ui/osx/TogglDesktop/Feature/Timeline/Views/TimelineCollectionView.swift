@@ -55,7 +55,7 @@ final class TimelineCollectionView: NSCollectionView {
         guard let draggTimestamp = timestamp(from: event) else { return }
         draggingEndTime = draggTimestamp
 
-        timelineDelegate?.timelineDidStartDragging(
+        timelineDelegate?.timelineDidUpdateDragging(
             withStartTime: min(draggingStartTime, draggingEndTime),
             endTime: max(draggingStartTime, draggingEndTime)
         )

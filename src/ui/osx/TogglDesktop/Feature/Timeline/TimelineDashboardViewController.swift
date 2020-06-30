@@ -546,7 +546,7 @@ extension TimelineDashboardViewController: TimelineDatasourceDelegate {
         DesktopLibraryBridge.shared().updateTimeEntryWithStart(atTimestamp: start, guid: guid, keepEndTimeFixed: keepEndTimeFixed)
     }
 
-    func shouldPresentResizePopover(at cell: TimelineTimeEntryCell, onTopCorner: Bool) {
+    func shouldPresentResizePopover(at cell: TimelineBaseCell, onTopCorner: Bool) {
 
         // Compute the position
         let bounds = cell.foregroundBox.bounds
@@ -600,6 +600,9 @@ extension TimelineDashboardViewController: TimelineCollectionViewDelegate {
     }
 
     func timelineDidUpdateDragging(withStartTime startTime: TimeInterval, endTime: TimeInterval) {
+//        let draggTimeEntry = TimelineTimeEntryPlaceholder(start: startTime, end: endTime)
+//        datasource.renderNewDraggingTimeEntry(draggTimeEntry)
+
         datasource.updateDraggingTimeEntry(withStartTime: startTime, endTime: endTime)
     }
 
